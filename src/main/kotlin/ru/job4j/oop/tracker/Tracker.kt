@@ -11,7 +11,7 @@ class Tracker {
     private fun indexOf(id: String): Int {
         var result = -1
         for (i in items.indices) {
-            if (items[i].id.equals(id)) {
+            if (items[i].id == id) {
                 result = i
                 break
             }
@@ -29,7 +29,7 @@ class Tracker {
     fun findByName(key: String?): List<Item> {
         val itemsNameId: MutableList<Item> = ArrayList()
         for (item in items) {
-            if (item.name.equals(key)) {
+            if (item.name == key) {
                 itemsNameId.add(item)
             }
         }
@@ -38,7 +38,7 @@ class Tracker {
     fun findById(id: String): Item? {
         var item: Item? = null
         val index = indexOf(id)
-        if (index != -1 && items[index].id.equals(id)) {
+        if (index != -1 && items[index].id == id) {
             item = items[index]
         }
         return item

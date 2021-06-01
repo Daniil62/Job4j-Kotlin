@@ -4,8 +4,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 
 class ItemTest : StringSpec({
-    val item = Item("First item")
-    val item2 = Item("Second item")
+    val item = Item("", "First item")
+    val item2 = Item("", "Second item")
     val item3 : Item? = null
     "Compare item with item2" {
         val point = item < item2
