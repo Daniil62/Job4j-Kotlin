@@ -27,7 +27,7 @@ class Tracker {
         return items
     }
     fun findByName(key: String?): List<Item> {
-        val itemsNameId: MutableList<Item> = ArrayList()
+        val itemsNameId = ArrayList<Item>()
         for (item in items) {
             if (item.getName() == key) {
                 itemsNameId.add(item)

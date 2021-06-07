@@ -25,10 +25,10 @@ object StartUI {
         when(action) {
             "0" -> {
                 println("Enter name for item.")
-                actionAdd(tracker.add(Item(name = readLine().toString())))
+                Action.actionAdd(tracker.add(Item(name = readLine().toString())))
                 }
             "1" -> {
-                actionFindAll()
+                Action.actionFindAll()
             }
             "2" -> {
                 println("Goodbye.")
@@ -38,18 +38,22 @@ object StartUI {
             }
         }
     }
-    private fun actionAdd(item: Item) {
-        println("=== Add new item ===\n"
-                + item.getName() + "\n"
-                + item.getId() +
-                "\n====================\n")
-    }
-    private fun actionFindAll() {
-        println("=== Find all ===")
-        for(item in tracker.findAll()) {
-            println(item.getName())
+    class Action private constructor() {
+        companion object {
+            fun actionAdd(item: Item) {
+                println("=== Add new item ===\n"
+                        + item.getName() + "\n"
+                        + item.getId() +
+                        "\n====================\n")
+            }
+            fun actionFindAll() {
+                println("=== Find all ===")
+                for(item in tracker.findAll()) {
+                    println(item.getName())
+                }
+                println("================\n")
+            }
         }
-        println("================\n")
     }
 }
 fun main() {
