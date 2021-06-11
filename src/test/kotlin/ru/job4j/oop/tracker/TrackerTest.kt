@@ -2,6 +2,8 @@ package ru.job4j.oop.tracker
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
+import ru.job4j.oop.tracker.logic.Tracker
+import ru.job4j.oop.tracker.model.Item
 
 class TrackerTest : StringSpec({
     val tracker = Tracker()

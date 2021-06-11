@@ -1,4 +1,4 @@
-package ru.job4j.oop.tracker
+package ru.job4j.oop.tracker.model
 
 data class Item(private var id : String = "", private var name : String = "") : Comparable<Item?> {
     fun getId(): String {

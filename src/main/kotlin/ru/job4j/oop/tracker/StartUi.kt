@@ -1,61 +1,41 @@
 package ru.job4j.oop.tracker
 
+import ru.job4j.oop.tracker.interfaces.Input
+import ru.job4j.oop.tracker.logic.actions.ActionAdd
+import ru.job4j.oop.tracker.logic.actions.ActionExit
+import ru.job4j.oop.tracker.logic.actions.ActionShowAll
+import ru.job4j.oop.tracker.interfaces.UserAction
+import ru.job4j.oop.tracker.logic.ConsoleInput
+import ru.job4j.oop.tracker.logic.Tracker
+import ru.job4j.oop.tracker.logic.ValidateInput
+
 object StartUI {
-    private val tracker: Tracker = Tracker()
     private val menu = arrayOf(
         "0. Add new Item",
         "1. Show all items",
         "2. Exit Program"
     )
-    fun init() {
-        var action = ""
-        while (action != "2") {
-            showMenu()
-            action = readLine().toString()
-            selectAction(action)
-        }
-    }
     private fun showMenu() {
         println("Menu.")
         for (string in menu) {
             println(string)
         }
     }
-    private fun selectAction(action: String) {
-        when(action) {
-            "0" -> {
-                println("Enter name for item.")
-                Action.actionAdd(tracker.add(Item(name = readLine().toString())))
-                }
-            "1" -> {
-                Action.actionFindAll()
-            }
-            "2" -> {
-                println("Goodbye.")
-            }
-            else -> {
-                println("You entered som nonsense.")
-            }
-        }
-    }
-    class Action private constructor() {
-        companion object {
-            fun actionAdd(item: Item) {
-                println("=== Add new item ===\n"
-                        + item.getName() + "\n"
-                        + item.getId() +
-                        "\n====================\n")
-            }
-            fun actionFindAll() {
-                println("=== Find all ===")
-                for(item in tracker.findAll()) {
-                    println(item.getName())
-                }
-                println("================\n")
-            }
+    fun init(tracker: Tracker, input: Input, actions: List<UserAction>) {
+        var run = true
+        while (run) {
+            showMenu()
+            val select = input.askInt("   Select: ", actions.size)
+            run = actions[select].action(tracker, input)
         }
     }
 }
 fun main() {
-    StartUI.init()
+    val actions = ArrayList<UserAction>()
+    val tracker = Tracker()
+    val validateInput = ValidateInput(ConsoleInput())
+    actions.add(ActionAdd())
+    actions.add(ActionShowAll())
+    actions.add(ActionExit())
+    StartUI.init(tracker, validateInput, actions)
 }

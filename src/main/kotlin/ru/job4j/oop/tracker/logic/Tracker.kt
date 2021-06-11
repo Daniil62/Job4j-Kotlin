@@ -1,5 +1,6 @@
-package ru.job4j.oop.tracker
+package ru.job4j.oop.tracker.logic
 
+import ru.job4j.oop.tracker.model.Item
 import java.util.*
 
 class Tracker {
