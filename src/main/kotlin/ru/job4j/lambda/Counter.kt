@@ -1,12 +1,10 @@
 package ru.job4j.lambda
 
-import kotlin.streams.toList
-
 class Counter {
     fun count(list: ArrayList<Int>): Int {
-        return list.stream()
-            .filter { i -> i % 2 == 0 }
-            .map { i -> i + 1 }.toList().sum()
+        return with(list.filter { it % 2 == 0 }) {
+            if (isNotEmpty()) reduce { a, b -> a + b + 1 } + 1 else 0
+        }
     }
 }
 fun main() {
