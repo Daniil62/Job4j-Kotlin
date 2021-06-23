@@ -8,7 +8,7 @@ class ActionShowAll : UserAction {
     override fun action(tracker: Tracker, input: Input): Boolean {
         println("=== Find all ===")
         for(item in tracker.findAll()) {
-            println(item.getName())
+            println(item.name)
         }
         println("================\n")
         return true

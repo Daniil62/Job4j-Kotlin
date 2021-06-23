@@ -8,9 +8,8 @@ import ru.job4j.oop.tracker.interfaces.UserAction
 class ActionAdd : UserAction {
     override fun action(tracker: Tracker, input: Input): Boolean {
         val item = tracker.add(Item(name = input.askStr("Enter name for item.")!!))
-        println("=== Add new item ===\n"
-                + item.getName() + "\n"
-                + item.getId() +
+        println("=== Add new item ===\n${item.name}"
+                + "\n${item.id}"+
                 "\n====================\n")
         return true
     }

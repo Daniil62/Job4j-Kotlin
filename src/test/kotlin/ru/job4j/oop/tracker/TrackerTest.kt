@@ -12,7 +12,7 @@ class TrackerTest : StringSpec({
     val item3 = Item("", "Third item")
     "Add" {
         tracker.add(item)
-        tracker.add(item2).getName() shouldBe "Second item"
+        tracker.add(item2).name shouldBe "Second item"
     }
     "Find all" {
     tracker.findAll() shouldBe arrayOf(item, item2)
@@ -24,14 +24,14 @@ class TrackerTest : StringSpec({
         tracker.findByName("New item") shouldBe emptyArray<Item>()
     }
     "Find by id" {
-        val id = item.getId()
+        val id = item.id
         id.let { tracker.findById(it) shouldBe item }
     }
     "Try to Find by incorrect id" {
         tracker.findById("#####") shouldBe null
     }
     "Replace" {
-        val id = item2.getId()
+        val id = item2.id
         id.let { tracker.replace(it, item3) shouldBe true }
     }
     "Find all AFTER REPLACE" {
@@ -41,7 +41,7 @@ class TrackerTest : StringSpec({
         tracker.delete("#####") shouldBe false
     }
     "Delete" {
-        val id = item3.getId()
+        val id = item3.id
         id.let { tracker.delete(id) shouldBe true }
     }
     "Try to find by deleted name" {
