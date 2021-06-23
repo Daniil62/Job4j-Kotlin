@@ -8,13 +8,13 @@ class BankService {
     fun addUser(user: User) {
         users.putIfAbsent(user, ArrayList())
     }
-    fun findByRequisite(passport: String, requisite: String): Account? {
+    fun findAccounts(passport: String): List<Account>? {
         val user = findByPassport(passport)
-        return users[user]
-            ?.stream()
-            ?.filter { account -> account.requisite == requisite }
-            ?.findFirst()
-            ?.orElse(null)
+        return user?.let { users[user] }
+    }
+    fun findByRequisite(passport: String, requisite: String): Account? {
+        return findByPassport(passport)?.let {
+                user -> users[user]?.find { it.requisite == requisite } }
     }
     fun addAccount(passport: String, account: Account) {
         val user = findByPassport(passport)
@@ -32,8 +32,8 @@ class BankService {
         destPassport: String, descRequisite: String, amount: Double): Boolean {
         val source = findByRequisite(srcPassport, srcRequisite)
         val dest = findByRequisite(destPassport, descRequisite)
-        source?.apply { balance -= amount }
-        dest?.apply { balance += amount }
+        source?.let { source.balance -= amount }
+        dest?.let { dest.balance += amount }
         return source != null && dest != null
     }
 }

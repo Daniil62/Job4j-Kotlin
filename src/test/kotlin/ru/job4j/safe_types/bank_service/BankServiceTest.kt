@@ -36,13 +36,15 @@ class BankServiceTest : StringSpec({
     }
     "Incorrect money transfer" {
         val req = "###"
-        val account2 = Account(req, 2000.0)
-        bank.addAccount(passport, account2)
         bank.transferMoney(
             passport, requisite,
             "incorrect", req, 3000.0) shouldBe false
         bank.transferMoney(
             passport, requisite,
             passport, "incorrect", 3000.0) shouldBe false
+    }
+    "Find accounts" {
+        bank.findAccounts(user.passport) shouldBe
+                listOf(account, Account("###", 2000.0))
     }
 })
